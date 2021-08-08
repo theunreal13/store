@@ -15,10 +15,28 @@ import {
 import { ImageCarousel, LoadingDots } from '@components/ui'
 import ProductLoader from './ProductLoader'
 
+type SwellProductOption = {
+  id: string
+  name: string
+  values: any[]
+}
+
+export interface SwellProduct {
+  id: string
+  description: string
+  name: string
+  slug: string
+  currency: string
+  price: number
+  images: any[]
+  options: SwellProductOption[]
+  variants: any[]
+}
+
 interface Props {
   className?: string
   children?: any
-  product: ShopifyBuy.Product
+  product: SwellProduct
   renderSeo?: boolean
   description?: string
   title?: string
@@ -28,21 +46,22 @@ const ProductBox: React.FC<Props> = ({
   product,
   renderSeo = true,
   description = product.description,
-  title = product.title,
+  title = product.name,
 }) => {
+
   const [loading, setLoading] = useState(false)
   const addItem = useAddItemToCart()
   const colors: string[] | undefined = product?.options
     ?.find((option) => option?.name?.toLowerCase() === 'color')
-    ?.values?.map((op) => op.value as string)
+    ?.values?.map((op) => op.name as string)
 
   const sizes: string[] | undefined = product?.options
     ?.find((option) => option?.name?.toLowerCase() === 'size')
-    ?.values?.map((op) => op.value as string)
+    ?.values?.map((op) => op.name as string)
 
   const variants = useMemo(
-    () => prepareVariantsWithOptions(product?.variants),
-    [product?.variants]
+    () => prepareVariantsWithOptions(product),
+    [product]
   )
   const images = useMemo(() => prepareVariantsImages(variants, 'color'), [
     variants,
@@ -77,12 +96,12 @@ const ProductBox: React.FC<Props> = ({
     }
   }
   const allImages = images
-    .map(({ src }) => ({ src: src.src }))
+    .map((image) => ({ src: image.src}))
     .concat(
       product.images &&
         product.images.filter(
-          ({ src }) => !images.find((image) => image.src.src === src)
-        )
+          ({ file }) => !images.find((image) => image.file?.url === file?.url)
+        ).map(productImage => ({ ...productImage, src: productImage.file?.url ?? 'https://via.placeholder.com/1050x1050' }))
     )
 
   return (
@@ -97,7 +116,7 @@ const ProductBox: React.FC<Props> = ({
             description: description,
             images: [
               {
-                url: product.images?.[0]?.src!,
+                url: product.images?.[0]?.file.url!,
                 width: 800,
                 height: 600,
                 alt: title,
@@ -126,7 +145,7 @@ const ProductBox: React.FC<Props> = ({
                   setColor(images[index].color)
                 }
               }}
-              images={allImages?.length > 0 ? allImages: [{
+              images={allImages?.length > 0 ? allImages : [{
                   src: `https://via.placeholder.com/1050x1050`,
                 }]}
             ></ImageCarousel>
@@ -136,7 +155,8 @@ const ProductBox: React.FC<Props> = ({
           <span sx={{ mt: 0, mb: 2 }}>
             <Themed.h1>{title}</Themed.h1>
             <Themed.h4 aria-label="price" sx={{ mt: 0, mb: 2 }}>
-              {getPrice(variant.priceV2.amount, variant.priceV2.currencyCode)}
+              {getPrice(variant.price, 'USD')} 
+              {/* TODO: add variant currency */}
             </Themed.h4>
           </span>
           <div dangerouslySetInnerHTML={{ __html: description! }} />

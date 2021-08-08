@@ -1,49 +1,20 @@
-/* 
-  prepareVariantsWithOptions()
-
-  This function changes the structure of the variants to
-  more easily get at their options. The original data 
-  structure looks like this:
-
-  {
-    "shopifyId": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zMTc4NDQ4MTAzMDE4OA==",
-    "selectedOptions": [
-      {
-        "name": "Color",
-        "value": "Red"
-      },
-      {
-        "name": "Size",
-        "value": "Small"
-      }
-    ]
-  },
-
-  This function accepts that and outputs a data structure that looks like this:
-
-  {
-    "shopifyId": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zMTc4NDQ4MTAzMDE4OA==",
-    "color": "Red",
-    "size": "Small"
-  },
-*/
+import { SwellProduct } from '../../../../../blocks/ProductView/ProductView'
 
 export function prepareVariantsWithOptions(
-  variants: any[]
-  // variants: Readonly<ShopifyBuy.ProductVariant[]>
+  product: SwellProduct
 ) {
-  return variants.map((variant) => {
-    // TODO: look into types, prob need update in @types/shopify-buy
-    // convert the options to a dictionary instead of an array
-    const optionsDictionary = variant.selectedOptions?.reduce(
-      (options: any, option: any) => {
-        options[`${option?.name?.toLowerCase()}`] = option?.value
-        return options
-      },
-      {}
-    )
-
-    // return an object with all of the variant properties + the options at the top level
+  return product.variants.map((variant) => {
+    const optionsDictionary = variant.option_value_ids?.reduce((optionValues: any, optionId: string) => {
+      product.options.find((option) => {
+        const matchingOptionValue = option.values.find(value => {
+          return value?.id === optionId
+        })
+        if (matchingOptionValue) {
+          optionValues[`${option?.name?.toLowerCase()}`] = matchingOptionValue?.name
+        }
+      });
+      return optionValues
+    }, {});
     return {
       ...optionsDictionary,
       ...variant,
@@ -97,7 +68,7 @@ export function prepareVariantsImages(
   // {
   //   [optionKey]: image
   // }
-  const imageDictionary = variants.reduce<Record<string, ShopifyBuy.Image>>(
+  const imageDictionary = variants.reduce(
     (images, variant) => {
       if (variant[optionKey]) {
         images[variant[optionKey]] = variant.image
@@ -112,9 +83,10 @@ export function prepareVariantsImages(
   const images = Object.keys(imageDictionary).map((key) => {
     return {
       [optionKey]: key,
-      src: imageDictionary[key],
+      src: imageDictionary[key] ?? 'https://via.placeholder.com/1050x1050',
     }
   })
+
 
   return images
 }

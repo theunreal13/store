@@ -30,6 +30,25 @@ Builder.register('insertMenu', {
   ],
 })
 
+Builder.register('insertMenu', {
+  name: 'Swell Collection Components',
+  items: [
+    { name: 'CollectionBox' },
+    { name: 'CollectionViewSwell' },
+    { name: 'ProductCollectionGridSwell' },
+  ],
+})
+
+
+Builder.register('insertMenu', {
+  name: 'Swell Products Components',
+  items: [
+    { name: 'SwellProductView' },
+    { name: 'SwellProductBox' },
+    { name: 'ProductGrid' }
+  ],
+})
+
 const Noop: FC = ({ children }) => <>{children}</>
 
 export default function MyApp({ Component, pageProps }: AppProps) {

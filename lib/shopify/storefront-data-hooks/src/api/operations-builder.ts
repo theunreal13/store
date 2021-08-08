@@ -91,7 +91,6 @@ export async function getProduct(
       `https://cdn.builder.io/api/v2/content/${config.productsModel}?${query}`
     ).then((res) => res.json())
   ).results
-
   if (options.withContent) {
     return productsContent[0]
   }

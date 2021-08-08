@@ -10,7 +10,7 @@ import { BuilderComponent, Builder, builder } from '@builder.io/react'
 import builderConfig from '@config/builder'
 import DefaultErrorPage from 'next/error'
 import Head from 'next/head'
-import { resolveBuilderContent } from '@lib/resolve-builder-content'
+import { resolveSwellContent } from '@lib/resolve-swell-content'
 
 builder.init(builderConfig.apiKey)
 import '../blocks/ProductGrid/ProductGrid.builder'
@@ -26,7 +26,7 @@ export async function getStaticProps({
   params,
   locale,
 }: GetStaticPropsContext<{ path: string[] }>) {
-  const page = await resolveBuilderContent('page', {
+  const page = await resolveSwellContent('page', {
     locale,
     urlPath: '/' + (params?.path?.join('/') || ''),
   })

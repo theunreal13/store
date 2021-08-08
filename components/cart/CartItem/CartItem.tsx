@@ -103,8 +103,8 @@ const CartItem = ({
               }}
             >
               {getPrice(
-                item.variant.priceV2.amount,
-                item.variant.priceV2.currencyCode || 'USD'
+                item.variant.price,
+                'USD'//item.variant.priceV2.currencyCode || 'USD'
               )}
             </Text>
           </>

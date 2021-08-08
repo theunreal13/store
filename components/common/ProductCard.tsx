@@ -6,9 +6,27 @@ import { Link, ImageCarousel } from '@components/ui'
 import { getPrice } from '@lib/shopify/storefront-data-hooks/src/utils/product'
 import { useState } from 'react'
 
+type SwellProductOption = {
+  id: string
+  name: string
+  values: any[]
+}
+
+export interface SwellProduct {
+  id: string
+  description: string
+  name: string
+  slug: string
+  currency: string
+  price: number
+  images: any[]
+  options: SwellProductOption[]
+  variants: any[]
+}
+
 export interface ProductCardProps {
   className?: string
-  product: ShopifyBuy.Product
+  product: SwellProduct
   imgWidth: number | string
   imgHeight: number | string
   imgLayout?: 'fixed' | 'intrinsic' | 'responsive' | undefined
@@ -27,10 +45,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
   imgLayout = 'responsive',
 }) => {
   const handle = (product as any).handle
-  const productVariant: any = product.variants[0]
+  // TODO: fix price for no variants
+  // const productVariant: any = product?.variants[0] ?? { price: 5 }//product.variants[0]
   const price = getPrice(
-    productVariant.priceV2.amount,
-    productVariant.priceV2.currencyCode
+    product.price + '',
+    'USD' // TODO pass currency in variants //productVariant.priceV2.currencyCode
   )
 
   return (
@@ -42,7 +61,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
         flexDirection: 'column',
       }}
     >
-      <Link href={`/product/${handle}/`}>
+      {/* TODO: update link to /product */}
+      <Link href={`/swell/${handle}/`}>
         <div sx={{ flexGrow: 1 }}>
           <ImageCarousel
             currentSlide={product.images ? product.images.length - 1 : 0}
@@ -54,7 +74,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             sizes={imgSizes}
             alt={product.title}
             images={
-              product.images.length ? product.images : [{
+              product.images?.length ? product.images : [{
                 src: `https://via.placeholder.com/${imgWidth}x${imgHeight}`,
               }]
             }

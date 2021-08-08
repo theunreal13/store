@@ -6,7 +6,7 @@ import type {
 import { useRouter } from 'next/router'
 import { Layout } from '@components/common'
 import { BuilderComponent, Builder, builder } from '@builder.io/react'
-import { resolveBuilderContent } from '@lib/resolve-builder-content'
+import { resolveSwellContent } from '@lib/resolve-swell-content'
 import '../../blocks/ProductView/ProductView.builder'
 import builderConfig from '@config/builder'
 import {
@@ -30,7 +30,7 @@ export async function getStaticProps({
     handle: params?.handle,
   })
 
-  const page = await resolveBuilderContent(builderModel, {
+  const page = await resolveSwellContent(builderModel, {
     productHandle: params?.handle,
     locale,
   })

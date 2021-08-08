@@ -65,7 +65,7 @@ const CartSidebarView: FC = () => {
               key={item.id}
               item={item}
               // todo update types
-              currencyCode={item.variant?.priceV2?.currencyCode || 'USD'}
+              currencyCode={ 'USD'}
             />
           ))}
           <Card sx={{ marginLeft: 'auto', minWidth: '10rem', paddingLeft: 5 }}>

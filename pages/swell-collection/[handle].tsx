@@ -19,7 +19,8 @@ import { getLayoutProps } from '@lib/get-layout-props'
 
 builder.init(builderConfig.apiKey!)
 Builder.isStatic = true
-const builderModel = 'collection-page-swell'
+// needs to match model name in dashboard
+const builderModel = 'collection-page'
 
 export async function getStaticProps({
   params,
@@ -29,7 +30,6 @@ export async function getStaticProps({
     handle: params?.handle,
   })
 
-  
   const page = await resolveSwellContent(builderModel, {
     collectionHandle: params?.handle,
     locale,
@@ -47,7 +47,8 @@ export async function getStaticProps({
 export async function getStaticPaths({ locales }: GetStaticPathsContext) {
   const paths = await getAllCollectionPaths(builderConfig)
   return {
-    paths: paths.map((path) => `/collection/${path}`),
+    // TODO: update to /collection
+    paths: paths.map((path) => `/swell-collection/${path}`),
     fallback: 'blocking',
   }
 }

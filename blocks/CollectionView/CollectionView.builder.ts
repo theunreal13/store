@@ -55,6 +55,27 @@ restrictedRegister(
 restrictedRegister(
   LazyCollectionView,
   {
+    name: 'CollectionBoxSwell',
+    description: 'Pick a collection to display its details',
+    image: 'https://unpkg.com/css.gg@2.0.0/icons/svg/collage.svg',
+    inputs: collectionBoxSchema
+      .concat([
+        {
+          name: 'collection',
+          // ShopifyCollectionHandle is a custom type defined in @builder.io/plugin-shopify that let's the user pick a collection from a picker and resolves to it's handle
+          type: `${
+            'Swell'
+          }CollectionHandle`,
+        },
+      ])
+      .reverse(),
+  },
+  ['page', 'product-page-swell', 'theme']
+)
+
+restrictedRegister(
+  LazyCollectionView,
+  {
     name: 'CollectionView',
     description:
       'Dynamic collection detaills, autobinds to the collection in context, use only on collection pages',
@@ -68,3 +89,21 @@ restrictedRegister(
   },
   ['collection-page', 'theme']
 )
+
+restrictedRegister(
+  LazyCollectionView,
+  {
+    name: 'CollectionViewSwell',
+    description:
+      'Dynamic collection detaills, autobinds to the collection in context, use only on collection pages',
+    inputs: collectionBoxSchema,
+    defaults: {
+      bindings: {
+        'component.options.collection': 'state.collection',
+        'component.options.renderSeo': 'true',
+      },
+    },
+  },
+  ['collection-page', 'theme']
+)
+

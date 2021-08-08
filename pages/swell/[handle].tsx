@@ -7,59 +7,58 @@ import { useRouter } from 'next/router'
 import { Layout } from '@components/common'
 import { BuilderComponent, Builder, builder } from '@builder.io/react'
 import { resolveSwellContent } from '@lib/resolve-swell-content'
+import '../../blocks/ProductView/ProductView.builder'
 import builderConfig from '@config/builder'
 import {
-  getCollection,
-  getAllCollectionPaths,
+  getAllProductPaths,
+  getProduct,
 } from '@lib/shopify/storefront-data-hooks/src/api/operations-swell'
 import DefaultErrorPage from 'next/error'
 import Head from 'next/head'
-import { useThemeUI } from '@theme-ui/core'
+import { useThemeUI } from 'theme-ui'
 import { getLayoutProps } from '@lib/get-layout-props'
-
 builder.init(builderConfig.apiKey!)
 Builder.isStatic = true
-const builderModel = 'collection-page-swell'
 
-export async function getStaticProps({
-  params,
-  locale,
-}: GetStaticPropsContext<{ handle: string }>) {
-  const collection = await getCollection(builderConfig, {
-    handle: params?.handle,
+const builderModel = 'product-page-swell'
+
+export async function getStaticProps(context: GetStaticPropsContext<{ handle: string }>) {
+  const product = await getProduct(builderConfig, {
+    slug: context.params?.handle,
   })
-
-  
   const page = await resolveSwellContent(builderModel, {
-    collectionHandle: params?.handle,
-    locale,
+    productHandle: context.params?.handle,
+    locale: context.locale,
   })
 
   return {
     props: {
       page: page || null,
-      collection: collection || null,
+      product: product || null,
       ...(await getLayoutProps()),
     },
   }
 }
 
 export async function getStaticPaths({ locales }: GetStaticPathsContext) {
-  const paths = await getAllCollectionPaths(builderConfig)
+  const paths = await getAllProductPaths()
   return {
-    paths: paths.map((path) => `/collection/${path}`),
+    // TODO: update to /product
+    paths: paths.map((path) => `/swell/${path}`),
     fallback: 'blocking',
   }
 }
 
 export default function Handle({
-  collection,
+  product,
   page,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  Builder.isStatic = true
   const router = useRouter()
   const isLive = !Builder.isEditing && !Builder.isPreviewing
   const { theme } = useThemeUI()
-  if (!collection && isLive) {
+  // This includes setting the noindex header because static files always return a status 200 but the rendered not found page page should obviously not be indexed
+  if (!product && isLive) {
     return (
       <>
         <Head>
@@ -76,9 +75,9 @@ export default function Handle({
   ) : (
     <BuilderComponent
       isStatic
-      key={collection.id}
+      key={product!.id}
       model={builderModel}
-      data={{ collection, theme }}
+      data={{ product, theme }}
       {...(page && { content: page })}
     />
   )

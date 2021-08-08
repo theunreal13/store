@@ -6,7 +6,9 @@ import { Themed, jsx } from 'theme-ui'
 import { LoadingDots } from '@components/ui'
 import builderConfig from '@config/builder'
 import { ProductGrid, ProductGridProps } from '../ProductGrid/ProductGrid'
-import { getCollection } from '@lib/shopify/storefront-data-hooks/src/api/operations-builder'
+import { getCollection } from '@lib/shopify/storefront-data-hooks/src/api/operations-swell'
+
+// TODO: import getCollection from swell-js
 
 interface Props {
   className?: string
@@ -45,7 +47,6 @@ const CollectionPreview: FC<Props> = ({
   }
 
   const { title, description, products } = collection
-
   return (
     <Themed.div
       sx={{ display: 'flex', flexDirection: 'column' }}
