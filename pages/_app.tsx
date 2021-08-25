@@ -33,7 +33,7 @@ Builder.register('insertMenu', {
 Builder.register('insertMenu', {
   name: 'Swell Collection Components',
   items: [
-    { name: 'CollectionBox' },
+    { name: 'CollectionBoxSwell', label: 'Collection' },
     { name: 'CollectionViewSwell' },
     { name: 'ProductCollectionGridSwell' },
   ],
@@ -44,7 +44,7 @@ Builder.register('insertMenu', {
   name: 'Swell Products Components',
   items: [
     { name: 'SwellProductView' },
-    { name: 'SwellProductBox' },
+    { name: 'ProductBox' },
     { name: 'ProductGrid' }
   ],
 })

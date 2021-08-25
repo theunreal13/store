@@ -41,7 +41,7 @@ export async function resolveSwellContent(
           products,
         }
       },
-      async CollectionBoxSwell(props) {
+      async CollectionBox(props) {
         let collection = props.collection
         if (collection && typeof collection === 'string') {
           collection = await getCollection(builderConfig, {
@@ -52,7 +52,7 @@ export async function resolveSwellContent(
           collection,
         }
       },
-      async SwellProductBox(props) {
+      async ProductBox(props) {
         let product = props.product
         if (product && typeof product === 'string') {
           product = await getProduct(builderConfig, {

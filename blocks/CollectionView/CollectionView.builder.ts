@@ -62,10 +62,7 @@ restrictedRegister(
       .concat([
         {
           name: 'collection',
-          // ShopifyCollectionHandle is a custom type defined in @builder.io/plugin-shopify that let's the user pick a collection from a picker and resolves to it's handle
-          type: `${
-            'Swell'
-          }CollectionHandle`,
+          type: 'SwellCollectionHandle',
         },
       ])
       .reverse(),

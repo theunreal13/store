@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import React, { useState, useEffect } from 'react'
 import { jsx } from 'theme-ui'
-import { getProduct } from '@lib/shopify/storefront-data-hooks/src/api/operations-builder'
+import { getProduct } from '@lib/shopify/storefront-data-hooks/src/api/operations-swell'
 import builderConfig from '@config/builder'
 import { LoadingDots } from '@components/ui'
 
@@ -25,7 +25,7 @@ const ProductLoader: React.FC<Props> = ({
     const fetchProduct = async () => {
       setLoading(true)
       const result = await getProduct(builderConfig, {
-        handle: String(product),
+        slug: String(product),
       })
       setProduct(result)
       setLoading(false)

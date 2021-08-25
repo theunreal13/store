@@ -72,7 +72,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             loading={imgLoading}
             layout={imgLayout}
             sizes={imgSizes}
-            alt={product.title}
+            alt={product.name}
             images={
               product.images?.length ? product.images : [{
                 src: `https://via.placeholder.com/${imgWidth}x${imgHeight}`,
@@ -82,7 +82,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </div>
         <div sx={{ textAlign: 'center' }}>
           <Themed.h2 sx={{ mt: 4, mb: 0, fontSize: 14 }}>
-            {product.title}
+            {product.name}
           </Themed.h2>
           <Text sx={{ fontSize: 12, mb: 2 }}>{price}</Text>
         </div>
