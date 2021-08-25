@@ -7,6 +7,7 @@ export function useClientUnsafe() {
     console.warn(
       'Using client directly will hit shopify API and counts towards your storefront rate limit'
     )
+    // TODO: remove
   }
   return client
 }

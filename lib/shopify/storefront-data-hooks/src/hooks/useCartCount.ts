@@ -1,15 +1,12 @@
 import { useContext } from 'react'
 import { Context } from '../Context'
 
-export function useCartCount() {
-  const { cart } = useContext(Context)
-  if (cart == null || cart.lineItems.length < 1) {
+export async function useCartCount() {
+  const { swell } = useContext(Context)
+  const cart = await swell.cart.get();
+  if (cart == null || cart.item_quantity < 1) {
     return 0
   }
 
-  const count = cart.lineItems.reduce((totalCount, lineItem) => {
-    return totalCount + lineItem.quantity
-  }, 0)
-
-  return count
+  return cart.item_quantity;
 }

@@ -1,17 +1,17 @@
 import { useAddItemsToCart } from './useAddItemsToCart'
-import { AttributeInput } from '../types'
+import { OptionInput } from '../types'
 
 export function useAddItemToCart() {
   const addItemsToCart = useAddItemsToCart()
 
   async function addItemToCart(
-    variantId: number | string,
+    product_id: string,
     quantity: number,
-    customAttributes?: AttributeInput[]
+    options?: OptionInput[]
   ) {
-    const item = [{ variantId, quantity, customAttributes }]
+    const item = [{ product_id, quantity, options }]
 
-    return addItemsToCart(item)
+    return await addItemsToCart(item)
   }
 
   return addItemToCart

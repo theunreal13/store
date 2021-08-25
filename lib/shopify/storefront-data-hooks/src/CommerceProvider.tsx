@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import ShopifyBuy from 'shopify-buy'
+import swell from 'swell-js';
 import { Context } from './Context'
 import { LocalStorage, LocalStorageKeys } from './utils'
+import swellConfig from '@config/swell'
 
 export interface CommerceProviderProps extends ShopifyBuy.Config {
   children: React.ReactNode
@@ -29,6 +31,7 @@ export function CommerceProvider({
   })
 
   useEffect(() => {
+    
     async function getNewCart() {
       const newCart = await client.checkout.create()
       setCart(newCart)
@@ -62,12 +65,21 @@ export function CommerceProvider({
   }, [])
 
   useEffect(() => {
+    async function loadSwell() {
+      await swell.init(swellConfig.storeId, swellConfig.publicKey)
+    }
+    loadSwell();
+  }, [])
+
+  useEffect(() => {
+
     LocalStorage.set(LocalStorageKeys.CART, JSON.stringify(cart))
   }, [cart])
 
   return (
     <Context.Provider
       value={{
+        swell,
         client,
         cart,
         setCart,

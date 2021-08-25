@@ -47,6 +47,7 @@ const ProductBox: React.FC<Props> = ({
   renderSeo = true,
   description = product.description,
   title = product.name,
+  productId = product.id
 }) => {
 
   const [loading, setLoading] = useState(false)
@@ -88,7 +89,7 @@ const ProductBox: React.FC<Props> = ({
   const addToCart = async () => {
     setLoading(true)
     try {
-      await addItem(variant.id, 1)
+      await addItem(productId, 1)
       openSidebar()
       setLoading(false)
     } catch (err) {

@@ -4,7 +4,7 @@ import ShopifyBuy from 'shopify-buy'
 import { LineItemPatch } from '../types'
 
 export function useAddItemsToCart() {
-  const { client, cart, setCart } = useContext(Context)
+  const { client, cart, setCart, swell } = useContext(Context)
 
   async function addItemsToCart(items: LineItemPatch[]) {
     if (cart == null || client == null) {
@@ -18,31 +18,26 @@ export function useAddItemsToCart() {
     }
 
     items.forEach((item) => {
-      if (item.variantId == null) {
-        throw new Error(`Missing variantId in item`)
+      if (item.product_id == null) {
+        throw new Error(`Missing productId in item`)
       }
 
       if (item.quantity == null) {
         throw new Error(
-          `Missing quantity in item with variant id: ${item.variantId}`
+          `Missing quantity in item with product id: ${item.product_id}`
         )
       } else if (typeof item.quantity != 'number') {
         throw new Error(
-          `Quantity is not a number in item with variant id: ${item.variantId}`
+          `Quantity is not a number in item with product id: ${item.product_id}`
         )
       } else if (item.quantity < 1) {
         throw new Error(
-          `Quantity must not be less than one in item with variant id: ${item.variantId}`
+          `Quantity must not be less than one in item with product id: ${item.product_id}`
         )
       }
     })
 
-    const newCart = await client.checkout.addLineItems(
-      cart.id,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      items as ShopifyBuy.LineItem[]
-    )
+    const newCart = await swell.cart.setItems(items)
     setCart(newCart)
   }
 

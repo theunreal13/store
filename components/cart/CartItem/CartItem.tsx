@@ -23,7 +23,7 @@ const CartItem = ({
   const [quantity, setQuantity] = useState(item.quantity)
   const [removing, setRemoving] = useState(false)
   const updateQuantity = async (quantity: number) => {
-    await updateItem(item.variant.id, quantity)
+    await updateItem(item.id, quantity)
   }
   const handleQuantity = (e: ChangeEvent<HTMLInputElement>) => {
     const val = Number(e.target.value)
@@ -53,7 +53,7 @@ const CartItem = ({
     try {
       // If this action succeeds then there's no need to do `setRemoving(true)`
       // because the component will be removed from the view
-      await removeItem(item.variant.id)
+      await removeItem(item.product.id)
     } catch (error) {
       console.error(error)
       setRemoving(false)
@@ -82,18 +82,18 @@ const CartItem = ({
           height={130}
           width={130}
           unoptimized
-          alt={item.variant.image.altText}
-          src={item.variant.image.src}
+          alt={item.product.meta_description}
+          src={item.product.images[0].file.url}
         />
       </div>
       <div>
         <Themed.div
           as={Link}
-          href={`/product/${item.variant.product.handle}/`}
+          href={`/product/${item.product.slug}/`}
           sx={{ fontSize: 3, m: 0, fontWeight: 700 }}
         >
           <>
-            {item.title}
+            {item.product.name}
             <Text
               sx={{
                 fontSize: 4,
@@ -103,7 +103,7 @@ const CartItem = ({
               }}
             >
               {getPrice(
-                item.variant.price,
+                item.product.price,
                 'USD'//item.variant.priceV2.currencyCode || 'USD'
               )}
             </Text>
@@ -135,11 +135,11 @@ const CartItem = ({
               </IconButton>
             </div>
           </li>
-          {item.variant.selectedOptions.map((option: any) => (
+          {/* {item.variant.selectedOptions.map((option: any) => (
             <li key={option.value}>
               {option.name}:{option.value}
             </li>
-          ))}
+          ))} */}
         </Themed.ul>
       </div>
     </Grid>

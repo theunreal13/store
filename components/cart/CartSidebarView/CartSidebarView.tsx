@@ -12,28 +12,28 @@ import env from '@config/env'
 const CartSidebarView: FC = () => {
   const checkoutUrl = useCheckoutUrl()
   const cart = useCart()
-  const subTotal = cart?.subtotalPrice
+  const subTotal = cart?.sub_total
   const total = ' - '
 
-  const items = cart?.lineItems ?? []
+  const items = cart?.items ?? []
   const isEmpty = items.length === 0
   const [cartUpsell, setCartUpsell] = useState()
 
   useEffect(() => {
     async function fetchContent() {
-      const items = cart?.lineItems || []
+      const items = cart?.items || []
       const cartUpsellContent = await builder
         .get('cart-upsell-sidebar', {
           cachebust: env.isDev,
           userAttributes: {
-            itemInCart: items.map((item: any) => item.variant.product.handle),
+            itemInCart: items.map((item: any) => item.product?.slug),
           } as any,
         })
         .toPromise()
       setCartUpsell(cartUpsellContent)
     }
     fetchContent()
-  }, [cart?.lineItems])
+  }, [cart?.items])
 
   return (
     <Themed.div
