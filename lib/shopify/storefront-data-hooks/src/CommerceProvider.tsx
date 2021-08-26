@@ -20,8 +20,7 @@ export function CommerceProvider({
     )
   }
 
-  const initialCart = LocalStorage.getInitialCart()
-  const [cart, setCart] = useState<ShopifyBuy.Cart | null>(initialCart)
+  // const [cart, setCart] = useState<ShopifyBuy.Cart | null>(null)
 
   const isCustomDomain = domain.includes('.')
 
@@ -31,58 +30,22 @@ export function CommerceProvider({
   })
 
   useEffect(() => {
-    
-    async function getNewCart() {
-      const newCart = await client.checkout.create()
-      setCart(newCart)
-    }
-
-    async function refreshExistingCart(cartId: string) {
-      try {
-        const refreshedCart = await client.checkout.fetch(cartId)
-
-        if (refreshedCart == null) {
-          return getNewCart()
-        }
-
-        const cartHasBeenPurchased = Boolean(refreshedCart.completedAt)
-
-        if (cartHasBeenPurchased) {
-          getNewCart()
-        } else {
-          setCart(refreshedCart)
-        }
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    if (cart == null) {
-      getNewCart()
-    } else {
-      refreshExistingCart(String(cart.id))
-    }
-  }, [])
-
-  useEffect(() => {
     async function loadSwell() {
       await swell.init(swellConfig.storeId, swellConfig.publicKey)
+      // const newCart = await swell.cart.get()
+      // setCart(newCart)
     }
+
     loadSwell();
   }, [])
-
-  useEffect(() => {
-
-    LocalStorage.set(LocalStorageKeys.CART, JSON.stringify(cart))
-  }, [cart])
 
   return (
     <Context.Provider
       value={{
         swell,
         client,
-        cart,
-        setCart,
+        // cart,
+        // setCart,
         domain,
         storefrontAccessToken,
       }}

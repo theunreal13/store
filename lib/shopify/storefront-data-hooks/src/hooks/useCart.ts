@@ -5,7 +5,6 @@ import { Cart } from '../types'
 export function useCart(): Cart | null {
   const [cart, setCart] = useState(null)
   const { swell } = useContext(Context)
-  // return cart
 
   useEffect(() => {
     const fetchData = async () => {

@@ -4,12 +4,9 @@ import ShopifyBuy from 'shopify-buy'
 import { LineItemPatch } from '../types'
 
 export function useAddItemsToCart() {
-  const { client, cart, setCart, swell } = useContext(Context)
+  const { swell } = useContext(Context)
 
   async function addItemsToCart(items: LineItemPatch[]) {
-    if (cart == null || client == null) {
-      throw new Error('Called addItemsToCart too soon')
-    }
 
     if (items.length < 1) {
       throw new Error(
@@ -37,8 +34,7 @@ export function useAddItemsToCart() {
       }
     })
 
-    const newCart = await swell.cart.setItems(items)
-    setCart(newCart)
+    await swell.cart.setItems(items)
   }
 
   return addItemsToCart

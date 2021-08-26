@@ -5,7 +5,6 @@ import { useGetLineItem } from './useGetLineItem'
 export function useRemoveItemsFromCart() {
   const { client, cart, setCart } = useContext(Context)
   const getLineItem = useGetLineItem()
-
   async function removeItemsFromCart(variantIds: string[]) {
     if (cart == null || client == null) {
       throw new Error('Called removeItemsFromCart too soon')

@@ -1,14 +1,14 @@
+import { useContext } from 'react'
 import { useRemoveItemsFromCart } from './useRemoveItemsFromCart'
+import { Context } from '../Context'
 
 export function useRemoveItemFromCart() {
-  const removeItemsFromCart = useRemoveItemsFromCart()
-
-  async function removeItemFromCart(variantId: number | string) {
-    if (variantId === '' || variantId == null) {
-      throw new Error('VariantId must not be blank or null')
+  const { swell } = useContext(Context)
+  async function removeItemFromCart(itemId: number | string) {
+    if (itemId === '' || itemId == null) {
+      throw new Error('ItemId must not be blank or null')
     }
-
-    return removeItemsFromCart([String(variantId)])
+    await swell.cart.removeItem(itemId);
   }
 
   return removeItemFromCart
