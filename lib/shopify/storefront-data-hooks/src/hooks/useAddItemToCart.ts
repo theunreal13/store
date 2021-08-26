@@ -1,17 +1,20 @@
-import { useAddItemsToCart } from './useAddItemsToCart'
 import { OptionInput } from '../types'
+import { useContext } from 'react'
+import { Context } from '../Context'
 
 export function useAddItemToCart() {
-  const addItemsToCart = useAddItemsToCart()
-
+  const { swell } = useContext(Context)
   async function addItemToCart(
     product_id: string,
     quantity: number,
     options?: OptionInput[]
   ) {
-    const item = [{ product_id, quantity, options }]
 
-    return await addItemsToCart(item)
+    return await swell.cart.addItem({
+      product_id,
+      quantity,
+      options
+    })
   }
 
   return addItemToCart

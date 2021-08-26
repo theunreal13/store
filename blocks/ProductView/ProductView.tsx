@@ -15,10 +15,15 @@ import {
 import { ImageCarousel, LoadingDots } from '@components/ui'
 import ProductLoader from './ProductLoader'
 
+type OptionValue = {
+  name: string
+  value: string
+}
+
 type SwellProductOption = {
   id: string
   name: string
-  values: any[]
+  values: OptionValue[]
 }
 
 export interface SwellProduct {
@@ -52,44 +57,70 @@ const ProductBox: React.FC<Props> = ({
 
   const [loading, setLoading] = useState(false)
   const addItem = useAddItemToCart()
-  const colors: string[] | undefined = product?.options
-    ?.find((option) => option?.name?.toLowerCase() === 'color')
-    ?.values?.map((op) => op.name as string)
 
-  const sizes: string[] | undefined = product?.options
-    ?.find((option) => option?.name?.toLowerCase() === 'size')
-    ?.values?.map((op) => op.name as string)
-
+  const formatOptionValues = (values: OptionValue[]) => {
+    return values.map(value => value.name);
+  }
   const variants = useMemo(
     () => prepareVariantsWithOptions(product),
     [product]
   )
+
+
+  
+  const options = product?.options;
+
+  const defaultSelections = options.map((option) => {
+    return {
+      id: option.values[0].id, name: option.name, value: option.values[0].name
+    }
+  })
+
+
   const images = useMemo(() => prepareVariantsImages(variants, 'color'), [
     variants,
   ])
 
+  function setSelectedVariant() {
+    const selectedVariant = variants.find((variant) => {
+      return variant.option_value_ids?.every((id) => {
+
+        return selections.find(selection => {
+          return selection.id==id
+        })
+      })
+    })
+    if (selectedVariant) {
+      setVariant(selectedVariant)
+    }
+  }
+
   const { openSidebar } = useUI()
 
-  const [variant, setVariant] = useState(variants[0] || {})
-  const [color, setColor] = useState(variant.color)
-  const [size, setSize] = useState(variant.size)
+  const [variant, setVariant] = useState(variants[0] || null)
+  const [selections, setSelections] = useState(defaultSelections)
+  const [ productOptions, setProductOptions ] = useState(options);
 
-  useEffect(() => {
-    const newVariant = variants.find((variant) => {
-      return (
-        (variant.size === size || !size) && (variant.color === color || !color)
-      )
+  function inputChangeHandler(option: SwellProductOption, value: string) {
+    const { name, values } = option;
+    const id = values.find((optionValue => optionValue.name == value))?.id;
+    const selectionToUpdate = selections.find(selection => {
+      return selection.name == name;
     })
 
-    if (variant.id !== newVariant?.id) {
-      setVariant(newVariant)
+    if (selectionToUpdate) {
+      selectionToUpdate.value = value
+      selectionToUpdate.id = id;
+
+      setSelections(selections)
+      setSelectedVariant()
     }
-  }, [size, color, variants, variant.id])
+  }
 
   const addToCart = async () => {
     setLoading(true)
     try {
-      await addItem(productId, 1)
+      await addItem(productId, 1, selections)
       openSidebar()
       setLoading(false)
     } catch (err) {
@@ -104,6 +135,11 @@ const ProductBox: React.FC<Props> = ({
           ({ file }) => !images.find((image) => image.file?.url === file?.url)
         ).map(productImage => ({ ...productImage, src: productImage.file?.url ?? 'https://via.placeholder.com/1050x1050' }))
     )
+
+    useEffect(() => {
+      setSelections(defaultSelections)
+      setSelectedVariant();
+    }, [])
 
   return (
     <React.Fragment>
@@ -141,11 +177,11 @@ const ProductBox: React.FC<Props> = ({
               width={1050}
               height={1050}
               priority
-              onThumbnailClick={(index) => {
-                if (images[index]?.color) {
-                  setColor(images[index].color)
-                }
-              }}
+              // onThumbnailClick={(index) => {
+              //   if (images[index]?.color) {
+              //     setColor(images[index].color)
+              //   }
+              // }}
               images={allImages?.length > 0 ? allImages : [{
                   src: `https://via.placeholder.com/1050x1050`,
                 }]}
@@ -156,32 +192,27 @@ const ProductBox: React.FC<Props> = ({
           <span sx={{ mt: 0, mb: 2 }}>
             <Themed.h1>{title}</Themed.h1>
             <Themed.h4 aria-label="price" sx={{ mt: 0, mb: 2 }}>
-              {getPrice(variant.price, 'USD')} 
+              {getPrice(variant ? variant?.price + '' : product.price + '', 'USD')} 
               {/* TODO: add variant currency */}
             </Themed.h4>
           </span>
           <div dangerouslySetInnerHTML={{ __html: description! }} />
           <div>
-            <Grid padding={2} columns={2}>
-              {colors?.length && (
+            {productOptions?.length && productOptions?.map((option) => {
+              return (
+              <Grid padding={2} columns={2}>
+                {option.values?.length && (
                 <OptionPicker
-                  key="Color"
-                  name="Color"
-                  options={colors}
-                  selected={color}
-                  onChange={(event) => setColor(event.target.value)}
+                  key={option.id}
+                  name={option.name}
+                  options={formatOptionValues(option.values)}
+                  selected={selections[option.id]}
+                  onChange={(event) => {inputChangeHandler(option, event.target.value)}}
                 />
               )}
-              {sizes?.length && (
-                <OptionPicker
-                  key="Size"
-                  name="Size"
-                  options={sizes}
-                  selected={size}
-                  onChange={(event) => setSize(event.target.value)}
-                />
-              )}
-            </Grid>
+              </Grid>
+              )
+            })}
           </div>
           <Button
             name="add-to-cart"
