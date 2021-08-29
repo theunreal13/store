@@ -1,6 +1,7 @@
 import swell from 'swell-js'
 import swellConfig from '@config/swell'
 import image from 'next/image';
+import { SwellProduct } from 'blocks/ProductView/ProductView';
 
 export interface BuillderConfig {
   apiKey: string
@@ -14,6 +15,25 @@ export interface CollectionProductsQuery {
   limit?: number
   cursor?: string
   apiKey: string
+}
+
+export async function searchProducts(
+  searchString: string,
+  limit = 100,
+  offset = 0
+) {
+
+  await swell.init(swellConfig.storeId, swellConfig.publicKey)
+  const products = await swell.products.list({
+    search: searchString,
+    limit,
+  })
+  return products?.results
+  .map((product: SwellProduct) => {
+    product.variants = product.variants?.results ?? [];
+    product.images = product.images?.map(image => ({ ...image, src: image.file.url})) ?? []
+    return product;
+  }) ?? [];
 }
 
 
