@@ -5,14 +5,14 @@ import { Themed, jsx } from 'theme-ui'
 import { Grid, Button } from '@theme-ui/components'
 import OptionPicker from '@components/common/OptionPicker'
 import { NextSeo } from 'next-seo'
-import { getPrice } from '@lib/shopify/storefront-data-hooks/src/utils/product'
+import { getPrice } from '@lib/swell/storefront-data-hooks/src/utils/product'
 import ProductLoader from './ProductLoader'
 import { ImageCarousel } from '@components/ui'
 
 interface Props {
   className?: string
   children?: any
-  product: ShopifyBuy.Product & Record<string, any>
+  product: any & Record<string, any>
   renderSeo?: boolean
   description?: string
   title?: string
@@ -105,7 +105,7 @@ const ProductBox: React.FC<Props> = ({
   )
 }
 const ProductView: React.FC<{
-  product: string | ShopifyBuy.Product
+  product: string | any
   renderSeo?: boolean
   description?: string
   title?: string

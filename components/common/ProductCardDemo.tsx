@@ -4,13 +4,13 @@ import { Themed, jsx } from 'theme-ui'
 import Image from 'next/image'
 import { Card, Text } from '@theme-ui/components'
 import { Link } from '@components/ui'
-import { getPrice } from '@lib/shopify/storefront-data-hooks/src/utils/product'
+import { getPrice } from '@lib/swell/storefront-data-hooks/src/utils/product'
 import { useState } from 'react'
 import NoSSR from './NoSSR'
 
 export interface ProductCardProps {
   className?: string
-  product: ShopifyBuy.Product
+  product: any
   imgWidth: number | string
   imgHeight: number | string
   imgLayout?: 'fixed' | 'intrinsic' | 'responsive' | undefined

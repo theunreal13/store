@@ -3,7 +3,7 @@
 import { Themed, jsx } from 'theme-ui'
 import { Card, Text } from '@theme-ui/components'
 import { Link, ImageCarousel } from '@components/ui'
-import { getPrice } from '@lib/shopify/storefront-data-hooks/src/utils/product'
+import { getPrice } from '@lib/swell/storefront-data-hooks/src/utils/product'
 import { useState } from 'react'
 
 type SwellProductOption = {
@@ -62,7 +62,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       }}
     >
       {/* TODO: update link to /product */}
-      <Link href={`/swell/${handle}/`}>
+      <Link href={`/product/${handle}/`}>
         <div sx={{ flexGrow: 1 }}>
           <ImageCarousel
             currentSlide={product.images ? product.images.length - 1 : 0}

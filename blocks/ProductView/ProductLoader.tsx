@@ -2,14 +2,14 @@
 /** @jsx jsx */
 import React, { useState, useEffect } from 'react'
 import { jsx } from 'theme-ui'
-import { getProduct } from '@lib/shopify/storefront-data-hooks/src/api/operations-swell'
+import { getProduct } from '@lib/swell/storefront-data-hooks/src/api/operations-swell'
 import builderConfig from '@config/builder'
 import { LoadingDots } from '@components/ui'
 
 interface Props {
   className?: string
   children: (product: any) => React.ReactElement
-  product: string | ShopifyBuy.Product
+  product: string | any
 }
 
 const ProductLoader: React.FC<Props> = ({

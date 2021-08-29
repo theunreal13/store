@@ -11,7 +11,7 @@ import builderConfig from '@config/builder'
 import {
   getCollection,
   getAllCollectionPaths,
-} from '@lib/shopify/storefront-data-hooks/src/api/operations-swell'
+} from '@lib/swell/storefront-data-hooks/src/api/operations-swell'
 import DefaultErrorPage from 'next/error'
 import Head from 'next/head'
 import { useThemeUI } from '@theme-ui/core'
@@ -19,7 +19,8 @@ import { getLayoutProps } from '@lib/get-layout-props'
 
 builder.init(builderConfig.apiKey!)
 Builder.isStatic = true
-const builderModel = 'collection-page-swell'
+
+const builderModel = 'collection-page'
 
 export async function getStaticProps({
   params,
@@ -29,7 +30,6 @@ export async function getStaticProps({
     handle: params?.handle,
   })
 
-  
   const page = await resolveSwellContent(builderModel, {
     collectionHandle: params?.handle,
     locale,

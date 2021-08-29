@@ -6,14 +6,14 @@ import { Themed, jsx } from 'theme-ui'
 import { LoadingDots } from '@components/ui'
 import builderConfig from '@config/builder'
 import { ProductGrid, ProductGridProps } from '../ProductGrid/ProductGrid'
-import { getCollection } from '@lib/shopify/storefront-data-hooks/src/api/operations-swell'
+import { getCollection } from '@lib/swell/storefront-data-hooks/src/api/operations-swell'
 
 // TODO: import getCollection from swell-js
 
 interface Props {
   className?: string
   children?: any
-  collection: string | any // ShopifyBuy.Collection once their types are up to date
+  collection: string | any
   productGridOptions: ProductGridProps
   renderSeo?: boolean
 }

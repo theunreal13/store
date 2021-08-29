@@ -12,7 +12,7 @@ import builderConfig from '@config/builder'
 import {
   getAllProductPaths,
   getProduct,
-} from '@lib/shopify/storefront-data-hooks/src/api/operations-builder'
+} from '@lib/swell/storefront-data-hooks/src/api/operations-swell'
 import DefaultErrorPage from 'next/error'
 import Head from 'next/head'
 import { useThemeUI } from 'theme-ui'
@@ -22,17 +22,13 @@ Builder.isStatic = true
 
 const builderModel = 'product-page'
 
-export async function getStaticProps({
-  params,
-  locale,
-}: GetStaticPropsContext<{ handle: string }>) {
+export async function getStaticProps(context: GetStaticPropsContext<{ handle: string }>) {
   const product = await getProduct(builderConfig, {
-    handle: params?.handle,
+    slug: context.params?.handle,
   })
-
   const page = await resolveSwellContent(builderModel, {
-    productHandle: params?.handle,
-    locale,
+    productHandle: context.params?.handle,
+    locale: context.locale,
   })
 
   return {
@@ -45,8 +41,9 @@ export async function getStaticProps({
 }
 
 export async function getStaticPaths({ locales }: GetStaticPathsContext) {
-  const paths = await getAllProductPaths(builderConfig)
+  const paths = await getAllProductPaths()
   return {
+    // TODO: update to /product
     paths: paths.map((path) => `/product/${path}`),
     fallback: 'blocking',
   }

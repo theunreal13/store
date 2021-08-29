@@ -1,10 +1,9 @@
 import React from 'react'
-import ShopifyBuy from 'shopify-buy'
 import { Cart } from './types'
 
 interface ContextShape {
   swell: any
-  client: ShopifyBuy.Client | null
+  client: any | null
   cart: Cart | null
   setCart: React.Dispatch<React.SetStateAction<Cart | null>>
   domain: string

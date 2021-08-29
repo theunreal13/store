@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 import { Context } from '../Context'
-import ShopifyBuy from 'shopify-buy'
 import { LineItemPatch } from '../types'
 
 export function useAddItemsToCart() {

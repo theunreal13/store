@@ -4,7 +4,7 @@ import builderConfig from '@config/builder'
 import {
   getCollection,
   getProduct,
-} from './shopify/storefront-data-hooks/src/api/operations-swell'
+} from './swell/storefront-data-hooks/src/api/operations-swell'
 builder.init(builderConfig.apiKey)
 Builder.isStatic = true
 

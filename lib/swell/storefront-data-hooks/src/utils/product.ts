@@ -29,45 +29,10 @@ export const getPrice = (price: string, currency: string) =>
     style: 'currency',
   }).format(parseFloat(price ? price : '0'))
 
-/*
-  prepareVariantsImages()
-
-  This function distills the variants images into a non-redundant
-  group that includes an option 'key' (most likely color). The
-  datastructure coming into this function looks like this:
-
-  {
-    "shopifyId": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zMTc4NDQ4MTAzMDE4OA==",
-    "image": image1,
-    "color": "Red",
-    "size": "Small"
-  },
-  {
-    "shopifyId": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaW1l2C8zMTc4NDQ4MTAzMDE4OA==",
-    "image": image1,
-    "color": "Red",
-    "size": "Medium"
-  },
-
-  And condenses them so that there is only one unique
-  image per key value:
-
-  {
-    "image": image1,
-    "color": "Red",
-  },
-*/
-
 export function prepareVariantsImages(
   variants: any[],
-  // variants: Readonly<GatsbyTypes.ShopifyProductVariant[]>,
   optionKey: any
 ): any[] {
-  // Go through the variants and reduce them into non-redundant
-  // images by optionKey. Output looks like this:
-  // {
-  //   [optionKey]: image
-  // }
   const imageDictionary = variants.reduce(
     (images, variant) => {
       if (variant[optionKey]) {
@@ -78,8 +43,6 @@ export function prepareVariantsImages(
     {}
   )
 
-  // prepare an array of image objects that include both the image
-  // and the optionkey value.
   const images = Object.keys(imageDictionary).map((key) => {
     return {
       [optionKey]: key,

@@ -4,7 +4,7 @@ if (!process.env.BUILDER_PUBLIC_KEY) {
 
 export default {
   apiKey: process.env.BUILDER_PUBLIC_KEY,
-  productsModel: 'shopify-product',
-  collectionsModel: 'shopify-collection',
+  productsModel: 'swell-product',
+  collectionsModel: 'swell-collection',
   isDemo: Boolean(process.env.IS_DEMO),
 }

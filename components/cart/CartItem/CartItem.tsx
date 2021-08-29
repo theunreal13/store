@@ -5,17 +5,17 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Plus, Minus } from '@components/icons'
-import { getPrice } from '@lib/shopify/storefront-data-hooks/src/utils/product'
+import { getPrice } from '@lib/swell/storefront-data-hooks/src/utils/product'
 import {
   useUpdateItemQuantity,
   useRemoveItemFromCart,
-} from '@lib/shopify/storefront-data-hooks'
+} from '@lib/swell/storefront-data-hooks'
 
 const CartItem = ({
   item,
   currencyCode,
 }: {
-  item: /*ShopifyBuy.LineItem todo: check if updated types*/ any
+  item: any
   currencyCode: string
 }) => {
   const updateItem = useUpdateItemQuantity()

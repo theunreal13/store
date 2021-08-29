@@ -6,12 +6,12 @@ import { Grid, Button } from '@theme-ui/components'
 import OptionPicker from '@components/common/OptionPicker'
 import { NextSeo } from 'next-seo'
 import { useUI } from '@components/ui/context'
-import { useAddItemToCart } from '@lib/shopify/storefront-data-hooks'
+import { useAddItemToCart } from '@lib/swell/storefront-data-hooks'
 import {
   prepareVariantsWithOptions,
   prepareVariantsImages,
   getPrice,
-} from '@lib/shopify/storefront-data-hooks/src/utils/product'
+} from '@lib/swell/storefront-data-hooks/src/utils/product'
 import { ImageCarousel, LoadingDots } from '@components/ui'
 import ProductLoader from './ProductLoader'
 
@@ -229,7 +229,7 @@ const ProductBox: React.FC<Props> = ({
 }
 
 const ProductView: React.FC<{
-  product: string | ShopifyBuy.Product
+  product: string | any
   renderSeo?: boolean
   description?: string
   title?: string

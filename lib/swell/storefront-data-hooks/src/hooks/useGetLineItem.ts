@@ -3,7 +3,7 @@ import { useCartItems } from './useCartItems'
 export function useGetLineItem() {
   const cartItems = useCartItems()
 
-  function getLineItem(itemId: string | number): ShopifyBuy.LineItem | null {
+  function getLineItem(itemId: string | number): any | null {
     if (cartItems.length < 1) {
       return null
     }

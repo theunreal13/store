@@ -1,7 +1,6 @@
-import ShopifyBuy from 'shopify-buy'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function isCart(potentialCart: any): potentialCart is ShopifyBuy.Cart {
+export function isCart(potentialCart: any) {
   return (
     potentialCart != null &&
     potentialCart.id != null &&

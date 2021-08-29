@@ -10,16 +10,16 @@ import { ProductCardDemo, ProductCard } from '@components/common'
 import {
   getCollection,
   getProduct,
-} from '@lib/shopify/storefront-data-hooks/src/api/operations-swell'
+} from '@lib/swell/storefront-data-hooks/src/api/operations-swell'
 import builderConfig from '@config/builder'
 interface HighlightedCardProps extends Omit<ProductCardProps, 'product'> {
   index: number
 }
 
 export interface ProductGridProps {
-  products?: ShopifyBuy.Product[]
+  products?: any[]
   productsList?: Array<{ product: string }>
-  collection?: string | any // ShopifyBuy.Collection
+  collection?: string | any
   offset: number
   limit: number
   cardProps: Omit<ProductCardProps, 'product'>

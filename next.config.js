@@ -5,7 +5,7 @@ const bundleAnalyzer = require('@next/bundle-analyzer')({
 module.exports = bundleAnalyzer({
   target: 'serverless',
   images: {
-    domains: ['cdn.shopify.com', 'cdn.builder.io', 'cdn.schema.io', 'via.placeholder.com'],
+    domains: ['cdn.builder.io', 'cdn.schema.io', 'via.placeholder.com'],
   },
   async headers() {
     return [
@@ -23,8 +23,6 @@ module.exports = bundleAnalyzer({
   },
   env: {
     // expose env to the browser
-    SHOPIFY_STOREFRONT_API_TOKEN: process.env.SHOPIFY_STOREFRONT_API_TOKEN,
-    SHOPIFY_STORE_DOMAIN: process.env.SHOPIFY_STORE_DOMAIN,
     BUILDER_PUBLIC_KEY: process.env.BUILDER_PUBLIC_KEY,
     SWELL_STORE_ID: process.env.SWELL_STORE_ID,
     SWELL_PUBLIC_KEY: process.env.SWELL_PUBLIC_KEY,

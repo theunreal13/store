@@ -12,38 +12,20 @@ import '../blocks/ProductGrid/ProductGrid.builder'
 import '../blocks/CollectionView/CollectionView.builder'
 import '../blocks/ProductView/ProductView.builder'
 
-Builder.register('insertMenu', {
-  name: 'Shopify Collections Components',
-  items: [
-    { name: 'CollectionBox', label: 'Collection stuff' },
-    { name: 'ProductCollectionGrid' },
-    { name: 'CollectionView' },
-  ],
-})
-
-Builder.register('insertMenu', {
-  name: 'Shopify Products Components',
-  items: [
-    { name: 'ProductGrid' },
-    { name: 'ProductBox' },
-    { name: 'ProductView' },
-  ],
-})
 
 Builder.register('insertMenu', {
   name: 'Swell Collection Components',
   items: [
-    { name: 'CollectionBoxSwell', label: 'Collection' },
-    { name: 'CollectionViewSwell' },
-    { name: 'ProductCollectionGridSwell' },
+    { name: 'CollectionBox', label: 'Collection' },
+    { name: 'CollectionView' },
+    { name: 'ProductCollectionGrid' },
   ],
 })
-
 
 Builder.register('insertMenu', {
   name: 'Swell Products Components',
   items: [
-    { name: 'SwellProductView' },
+    { name: 'ProductView' },
     { name: 'ProductBox' },
     { name: 'ProductGrid' }
   ],

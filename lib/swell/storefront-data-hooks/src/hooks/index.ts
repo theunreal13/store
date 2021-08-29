@@ -1,4 +1,3 @@
-export { useClientUnsafe } from './useClientUnsafe'
 export { useCart } from './useCart'
 export { useCartCount } from './useCartCount'
 export { useAddItemToCart } from './useAddItemToCart'

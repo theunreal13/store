@@ -65,24 +65,6 @@ export const productGridSchema: Input[] = [
   },
 ]
 
-// Builder.registerComponent(LazyProductGrid, {
-//   name: 'ProductGrid',
-//   image: 'https://unpkg.com/css.gg@2.0.0/icons/svg/play-list-add.svg',
-//   description: 'Pick products free form',
-//   inputs: [
-//     {
-//       name: 'productsList',
-//       type: 'list',
-//       subFields: [
-//         {
-//           name: 'product',
-//           type: `${isDemo ? 'ShopifyStore' : 'Shopify'}ProductHandle`,
-//         },
-//       ],
-//     },
-//   ].concat(productGridSchema as any),
-// })
-
 Builder.registerComponent(LazyProductGrid, {
   name: 'ProductGrid',
   image: 'https://unpkg.com/css.gg@2.0.0/icons/svg/play-list-add.svg',
@@ -103,18 +85,6 @@ Builder.registerComponent(LazyProductGrid, {
 
 Builder.registerComponent(LazyProductGrid, {
   name: 'ProductCollectionGrid',
-  image: 'https://unpkg.com/css.gg@2.0.0/icons/svg/display-grid.svg',
-  description: 'Choose a collection to show its products in a grid',
-  inputs: [
-    {
-      name: 'collection',
-      type: `${isDemo ? 'ShopifyStore' : 'Shopify'}CollectionHandle`,
-    },
-  ].concat(productGridSchema),
-})
-
-Builder.registerComponent(LazyProductGrid, {
-  name: 'ProductCollectionGridSwell',
   image: 'https://unpkg.com/css.gg@2.0.0/icons/svg/display-grid.svg',
   description: 'Choose a collection to show its products in a grid',
   inputs: [
