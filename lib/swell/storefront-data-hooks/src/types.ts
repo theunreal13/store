@@ -51,6 +51,8 @@ export type Cart = {
   discount_total: number
   quantity: number
   items: CartItem[]
+  item_quantity: number
+  checkout_url: string
   date_created: string
   discounts?: { id: number; amount: number }[] | null
 }

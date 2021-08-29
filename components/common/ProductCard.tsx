@@ -44,12 +44,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
   imgSizes,
   imgLayout = 'responsive',
 }) => {
-  const handle = (product as any).handle
-  // TODO: fix price for no variants
-  // const productVariant: any = product?.variants[0] ?? { price: 5 }//product.variants[0]
+  const handle = (product as any).slug
+
   const price = getPrice(
     product.price + '',
-    'USD' // TODO pass currency in variants //productVariant.priceV2.currencyCode
+    'USD'
   )
 
   return (
@@ -61,7 +60,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
         flexDirection: 'column',
       }}
     >
-      {/* TODO: update link to /product */}
       <Link href={`/product/${handle}/`}>
         <div sx={{ flexGrow: 1 }}>
           <ImageCarousel

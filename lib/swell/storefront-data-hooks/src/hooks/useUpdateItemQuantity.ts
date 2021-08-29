@@ -4,7 +4,7 @@ import { Context } from '../Context'
 import { useGetLineItem } from './useGetLineItem'
 
 export function useUpdateItemQuantity() {
-  const { swell } = useContext(Context)
+  const { swell, setCart } = useContext(Context)
   const getLineItem = useGetLineItem()
 
   async function updateItemQuantity(
@@ -24,13 +24,13 @@ export function useUpdateItemQuantity() {
     if (lineItem == null) {
       throw new Error(`Item with id ${itemId} not in cart`)
     }
-
+    let newCart;
     if (quantity == 0 || Number(quantity) == 0) {
-      await swell.cart.removeItem(itemId)
+      newCart = await swell.cart.removeItem(itemId)
     } else {
-      await swell.cart.updateItem(itemId, { quantity })
+      newCart = await swell.cart.updateItem(itemId, { quantity })
     }
-
+    setCart(newCart);
   }
 
   return updateItemQuantity

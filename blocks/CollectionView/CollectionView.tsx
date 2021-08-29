@@ -8,8 +8,6 @@ import builderConfig from '@config/builder'
 import { ProductGrid, ProductGridProps } from '../ProductGrid/ProductGrid'
 import { getCollection } from '@lib/swell/storefront-data-hooks/src/api/operations-swell'
 
-// TODO: import getCollection from swell-js
-
 interface Props {
   className?: string
   children?: any

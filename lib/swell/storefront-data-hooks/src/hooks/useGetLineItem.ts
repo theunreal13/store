@@ -4,11 +4,11 @@ export function useGetLineItem() {
   const cartItems = useCartItems()
 
   function getLineItem(itemId: string | number): any | null {
-    if (cartItems.length < 1) {
+    if (cartItems && cartItems.length < 1) {
       return null
     }
     
-    const item = cartItems.find((cartItem) => {
+    const item = cartItems?.find((cartItem) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
       return cartItem.id === itemId

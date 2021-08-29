@@ -24,7 +24,7 @@ const Navbar: FC = () => {
         .get('announcement-bar', {
           cachebust: env.isDev,
           userAttributes: {
-            itemInCart: items.map((item: any) => item.variant.product.handle),
+            itemInCart: items.map((item: any) => item.variant.product.slug),
           } as any,
         })
         .toPromise()

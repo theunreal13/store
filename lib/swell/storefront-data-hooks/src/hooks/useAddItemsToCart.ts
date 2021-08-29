@@ -3,7 +3,7 @@ import { Context } from '../Context'
 import { LineItemPatch } from '../types'
 
 export function useAddItemsToCart() {
-  const { swell } = useContext(Context)
+  const { swell, setCart } = useContext(Context)
 
   async function addItemsToCart(items: LineItemPatch[]) {
 
@@ -33,7 +33,8 @@ export function useAddItemsToCart() {
       }
     })
 
-    await swell.cart.setItems(items)
+    const newCart = await swell.cart.setItems(items)
+    setCart(newCart);
   }
 
   return addItemsToCart
