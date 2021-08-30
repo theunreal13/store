@@ -14,45 +14,13 @@ import {
 } from '@lib/swell/storefront-data-hooks/src/utils/product'
 import { ImageCarousel, LoadingDots } from '@components/ui'
 import ProductLoader from './ProductLoader'
+import { OptionInput, OptionValue, ProductOption, Product, ProductProps } from '@lib/swell/storefront-data-hooks/src/types'
 
-type OptionValue = {
-  name: string
-  value: string
-}
-
-type SwellProductOption = {
-  id: string
-  name: string
-  values: OptionValue[]
-}
-
-export interface SwellProduct {
-  id: string
-  description: string
-  name: string
-  slug: string
-  currency: string
-  price: number
-  images: any[]
-  options: SwellProductOption[]
-  variants: any[]
-}
-
-interface Props {
-  className?: string
-  children?: any
-  product: SwellProduct
-  renderSeo?: boolean
-  description?: string
-  title?: string
-}
-
-const ProductBox: React.FC<Props> = ({
+const ProductBox: React.FC<ProductProps> = ({
   product,
   renderSeo = true,
   description = product.description,
   title = product.name,
-  productId = product.id
 }) => {
 
   const [loading, setLoading] = useState(false)
@@ -66,11 +34,15 @@ const ProductBox: React.FC<Props> = ({
     [product]
   )
 
-
+interface Selection extends OptionInput {
+  id: string
+  name: string
+  value: string
+}
   
   const options = product?.options;
 
-  const defaultSelections = options.map((option) => {
+  const defaultSelections: Selection[] = options.map((option) => {
     return {
       id: option.values[0].id, name: option.name, value: option.values[0].name
     }
@@ -83,7 +55,7 @@ const ProductBox: React.FC<Props> = ({
 
   function setSelectedVariant() {
     const selectedVariant = variants.find((variant) => {
-      return variant.option_value_ids?.every((id) => {
+      return variant.option_value_ids?.every((id: string) => {
 
         return selections.find(selection => {
           return selection.id==id
@@ -101,9 +73,9 @@ const ProductBox: React.FC<Props> = ({
   const [selections, setSelections] = useState(defaultSelections)
   const [ productOptions, setProductOptions ] = useState(options);
 
-  function inputChangeHandler(option: SwellProductOption, value: string) {
+  function inputChangeHandler(option: ProductOption, value: string) {
     const { name, values } = option;
-    const id = values.find((optionValue => optionValue.name == value))?.id;
+    const id = values.find((optionValue => optionValue.name == value))?.id ?? '';
     const selectionToUpdate = selections.find(selection => {
       return selection.name == name;
     })
@@ -120,7 +92,7 @@ const ProductBox: React.FC<Props> = ({
   const addToCart = async () => {
     setLoading(true)
     try {
-      await addItem(productId, 1, selections)
+      await addItem(product.id, 1, selections)
       openSidebar()
       setLoading(false)
     } catch (err) {
@@ -206,6 +178,8 @@ const ProductBox: React.FC<Props> = ({
                   key={option.id}
                   name={option.name}
                   options={formatOptionValues(option.values)}
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment     
+                  // @ts-ignore
                   selected={selections[option.id]}
                   onChange={(event) => {inputChangeHandler(option, event.target.value)}}
                 />

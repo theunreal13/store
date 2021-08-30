@@ -1,7 +1,7 @@
-import { SwellProduct } from '../../../../../blocks/ProductView/ProductView'
+import { Product } from '@lib/swell/storefront-data-hooks/src/types'
 
 export function prepareVariantsWithOptions(
-  product: SwellProduct
+  product: Product
 ) {
   return product.variants.map((variant) => {
     const optionsDictionary = variant.option_value_ids?.reduce((optionValues: any, optionId: string) => {

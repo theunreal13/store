@@ -16,11 +16,26 @@ export interface Product {
   currency: string
   price: number
   images: any[]
-  options: any[]
+  options: ProductOption[]
   variants: Variant[]
 }
 
-export type Variant = {
+interface VariantResults {
+  results: Variant[]
+}
+export interface ProductResult {
+  id: string
+  description: string
+  name: string
+  slug: string
+  currency: string
+  price: number
+  options: ProductOption[]
+  images: any[]
+  variants: VariantResults
+}
+
+export interface Variant {
   id: string
   option_value_ids: string[]
   name: string
@@ -64,4 +79,26 @@ export type Image = {
     width: Number
   }
   id: string
+}
+
+export type OptionValue = {
+  id: string
+  name: string
+  value: string
+}
+
+export type ProductOption = {
+  id: string
+  name: string
+  values: OptionValue[]
+}
+
+
+export interface ProductProps {
+  className?: string
+  children?: any
+  product: Product
+  renderSeo?: boolean
+  description?: string
+  title?: string
 }

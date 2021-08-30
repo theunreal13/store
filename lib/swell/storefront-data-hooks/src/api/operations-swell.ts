@@ -1,7 +1,7 @@
 import swell from 'swell-js'
 import swellConfig from '@config/swell'
 import image from 'next/image';
-import { SwellProduct } from 'blocks/ProductView/ProductView';
+import { ProductResult, Product, Image } from '@lib/swell/storefront-data-hooks/src/types'
 
 export interface BuillderConfig {
   apiKey: string
@@ -17,6 +17,18 @@ export interface CollectionProductsQuery {
   apiKey: string
 }
 
+function normalizeProduct(product: ProductResult): Product {
+  const variants = product.variants?.results ?? [];
+  const images = product.images?.map((image: Image) => ({ ...image, src: image.file.url})) ?? []
+  return { ...product, variants, images };
+}
+
+function normalizeProducts(productResults: ProductResult[]): Product[] {
+  return productResults.map((product) => {
+    return normalizeProduct(product);
+  });
+}
+
 export async function searchProducts(
   searchString: string,
   limit = 100,
@@ -28,12 +40,7 @@ export async function searchProducts(
     search: searchString,
     limit,
   })
-  return products?.results
-  .map((product: SwellProduct) => {
-    product.variants = product.variants?.results ?? [];
-    product.images = product.images?.map(image => ({ ...image, src: image.file.url})) ?? []
-    return product;
-  }) ?? [];
+  return products?.results ? normalizeProducts(products?.results) : []
 }
 
 
@@ -44,11 +51,8 @@ export async function getAllProducts(
 ) {
   await swell.init(swellConfig.storeId, swellConfig.publicKey)
 
-  return (await swell.products.list()).results.map(product => {
-    product.variants = product.variants?.results;
-    product.images = product.images?.map(image => ({...image, src: image.file.url})) ?? []
-    return product
-  });
+  const productResults = await swell.products.list()
+  return normalizeProducts(productResults?.results);
 }
 
 export async function getAllProductPaths(
@@ -67,10 +71,8 @@ export async function getProduct(builderConfig: any,
       throw new Error('Either a slug or id is required')
     }
     
-    const product = await swell.products.get(options.id || options.slug, { expand: ['variants']});
-    product.variants = product.variants?.results;
-    product.images = product.images.map(image => ({ ...image, src: image.file.url}))
-  return product;
+  const result = await swell.products.get(options.id || options.slug, { expand: ['variants']});
+  return normalizeProduct(result);
 }
 
 
@@ -112,11 +114,7 @@ export async function getCollection(
   const query = options.id || options.handle;
   await swell.init(swellConfig.storeId, swellConfig.publicKey)
   const category = await swell.categories.get(query, { expand: ['products'] })
-  const products = category?.products?.results?.map((product) => {
-    product.variants = product.variants?.results ?? [];
-    product.images = product.images?.map(image => ({ ...image, src: image.file.url})) ?? []
-    return product;
-  }) ?? [];
+  const products = category?.products?.results ? normalizeProducts(category?.products?.results) : []
   // const { page, count } = products;
   // TODO: add pagination logic 
   const hasNextPage = false;

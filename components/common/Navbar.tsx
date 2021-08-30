@@ -19,19 +19,19 @@ const Navbar: FC = () => {
 
   useEffect(() => {
     async function fetchContent() {
-      const items = cart?.lineItems || []
+      const items = cart?.items || []
       const anouncementContent = await builder
         .get('announcement-bar', {
           cachebust: env.isDev,
           userAttributes: {
-            itemInCart: items.map((item: any) => item.variant.product.slug),
+            itemInCart: items.map((item: any) => item.product.slug),
           } as any,
         })
         .toPromise()
       setAnnouncement(anouncementContent)
     }
     fetchContent()
-  }, [cart?.lineItems])
+  }, [cart?.items])
 
   return (
     <React.Fragment>
