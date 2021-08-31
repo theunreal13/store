@@ -52,7 +52,7 @@ export async function getAllProducts(
   await swell.init(swellConfig.storeId, swellConfig.publicKey)
 
   const productResults = await swell.products.list()
-  return normalizeProducts(productResults?.results);
+  return productResults ? normalizeProducts(productResults?.results) : [];
 }
 
 export async function getAllProductPaths(
@@ -72,7 +72,7 @@ export async function getProduct(builderConfig: any,
     }
     
   const result = await swell.products.get(options.id || options.slug, { expand: ['variants']});
-  return normalizeProduct(result);
+  return result ? normalizeProduct(result) : null;
 }
 
 
