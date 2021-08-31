@@ -24,17 +24,14 @@ const isProduction = process.env.NODE_ENV === 'production'
 
 export async function getStaticProps({
   params,
-  locale,
 }: GetStaticPropsContext<{ path: string[] }>) {
   const page = await resolveSwellContent('page', {
-    locale,
     urlPath: '/' + (params?.path?.join('/') || ''),
   })
 
   return {
     props: {
       page,
-      locale,
       ...(await getLayoutProps()),
     },
     // Next.js will attempt to re-generate the page:
@@ -58,7 +55,6 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
 
 export default function Path({
   page,
-  locale,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter()
   const { theme } = useThemeUI()
@@ -90,7 +86,6 @@ export default function Path({
             type: 'website',
             title,
             description,
-            locale,
             ...(image && {
               images: [
                 {

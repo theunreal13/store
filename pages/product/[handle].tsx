@@ -28,7 +28,6 @@ export async function getStaticProps(context: GetStaticPropsContext<{ handle: st
   })
   const page = await resolveSwellContent(builderModel, {
     productHandle: context.params?.handle,
-    locale: context.locale,
   })
 
   return {
@@ -44,7 +43,7 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
   const paths = await getAllProductPaths()
   return {
     // TODO: update to /product
-    paths: paths.map((path) => `/product/${path}`),
+    paths: paths?.map((path) => `/product/${path}`) ?? [],
     fallback: 'blocking',
   }
 }

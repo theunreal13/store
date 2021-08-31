@@ -39,7 +39,7 @@ restrictedRegister(
       .concat([
         {
           name: 'collection',
-          type: 'SwellCollectionHandle',
+          type: 'SwellCategoryHandle',
         },
       ])
       .reverse(),

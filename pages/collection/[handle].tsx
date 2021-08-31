@@ -32,7 +32,6 @@ export async function getStaticProps({
 
   const page = await resolveSwellContent(builderModel, {
     collectionHandle: params?.handle,
-    locale,
   })
 
   return {
