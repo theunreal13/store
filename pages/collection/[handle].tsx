@@ -24,7 +24,6 @@ const builderModel = 'collection-page'
 
 export async function getStaticProps({
   params,
-  locale,
 }: GetStaticPropsContext<{ handle: string }>) {
   const collection = await getCollection(builderConfig, {
     handle: params?.handle,
