@@ -90,7 +90,7 @@ Builder.registerComponent(LazyProductGrid, {
   inputs: [
     {
       name: 'collection',
-      type: `SwellCollectionHandle`,
+      type: `SwellCategoryHandle`,
     },
   ].concat(productGridSchema),
 })
