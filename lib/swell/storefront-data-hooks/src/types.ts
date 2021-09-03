@@ -62,6 +62,8 @@ export type Cart = {
   currency: string
   tax_included_total: number
   sub_total: number
+  tax_total: number
+  shipment_total: number
   grand_total: number
   discount_total: number
   quantity: number

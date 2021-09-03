@@ -13,7 +13,9 @@ const CartSidebarView: FC = () => {
   const checkoutUrl = useCheckoutUrl()
   const cart = useCart()
   const subTotal = cart?.sub_total
-  const total = ' - '
+  const total = cart?.grand_total
+  const shippingTotal = cart?.shipment_total
+  const taxTotal = cart?.tax_total
 
   const items = cart?.items ?? []
   const isEmpty = items.length === 0
@@ -72,9 +74,9 @@ const CartSidebarView: FC = () => {
               <Text>Subtotal:</Text>
               <Text sx={{ marginLeft: 'auto' }}>{subTotal}</Text>
               <Text>Shipping:</Text>
-              <Text sx={{ marginLeft: 'auto' }}> - </Text>
+              <Text sx={{ marginLeft: 'auto' }}>{shippingTotal}</Text>
               <Text>Tax: </Text>
-              <Text sx={{ marginLeft: 'auto' }}> - </Text>
+              <Text sx={{ marginLeft: 'auto' }}>{taxTotal}</Text>
             </Grid>
 
             <Divider />

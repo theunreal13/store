@@ -164,8 +164,7 @@ interface Selection extends OptionInput {
           <span sx={{ mt: 0, mb: 2 }}>
             <Themed.h1>{title}</Themed.h1>
             <Themed.h4 aria-label="price" sx={{ mt: 0, mb: 2 }}>
-              {getPrice(variant ? variant?.price + '' : product.price + '', 'USD')} 
-              {/* TODO: add variant currency */}
+              {getPrice(variant ? variant?.price + '' : product.price + '', product.currency ?? 'USD')} 
             </Themed.h4>
           </span>
           <div dangerouslySetInnerHTML={{ __html: description! }} />
