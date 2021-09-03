@@ -34,8 +34,8 @@ const ProductCardDemo: React.FC<ProductCardProps> = ({
   const handle = (product as any).handle
   const productVariant: any = product.variants[0]
   const price = getPrice(
-    productVariant.compare_at_price || productVariant.price,
-    'USD'
+    productVariant.price,
+    product.currency ?? 'USD'
   )
   const alternateImage = product.images[1]?.src
 

@@ -83,7 +83,7 @@ const CartItem = ({
           width={130}
           unoptimized
           alt={item.product.meta_description}
-          src={item.product.images[0].file.url}
+          src={(item.product.images && item.product.images[0].file?.url) ?? 'https://via.placeholder.com/1050x1050'}
         />
       </div>
       <div>
@@ -104,7 +104,7 @@ const CartItem = ({
             >
               {getPrice(
                 item.price,
-                item.currency ?? 'USD'
+                currencyCode
               )}
             </Text>
           </>

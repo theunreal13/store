@@ -8,14 +8,15 @@ import { useCart, useCheckoutUrl } from '@lib/swell/storefront-data-hooks'
 import CartItem from '../CartItem'
 import { BuilderComponent, builder } from '@builder.io/react'
 import env from '@config/env'
+import { getPrice } from '@lib/swell/storefront-data-hooks/src/utils/product'
 
 const CartSidebarView: FC = () => {
   const checkoutUrl = useCheckoutUrl()
   const cart = useCart()
-  const subTotal = cart?.sub_total
-  const total = cart?.grand_total
-  const shippingTotal = cart?.shipment_total
-  const taxTotal = cart?.tax_total
+  const subTotal = getPrice(cart?.sub_total, cart?.currency ?? 'USD')
+  const total = getPrice(cart?.grand_total, cart?.currency ?? 'USD')
+  const shippingTotal = getPrice(cart?.shipment_total, cart?.currency ?? 'USD')
+  const taxTotal = getPrice(cart?.tax_total, cart?.currency ?? 'USD')
 
   const items = cart?.items ?? []
   const isEmpty = items.length === 0
@@ -66,7 +67,7 @@ const CartSidebarView: FC = () => {
             <CartItem
               key={item.id}
               item={item}
-              currencyCode={ 'USD'}
+              currencyCode={ cart?.currency ?? 'USD'}
             />
           ))}
           <Card sx={{ marginLeft: 'auto', minWidth: '10rem', paddingLeft: 5 }}>

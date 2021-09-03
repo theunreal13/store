@@ -47,8 +47,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const handle = (product as any).slug
 
   const price = getPrice(
-    product.price + '',
-    'USD'
+    product.price,
+    product.currency ?? 'USD'
   )
 
   return (
