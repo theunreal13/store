@@ -35,8 +35,8 @@ export function prepareVariantsImages(
 ): any[] {
   const imageDictionary = variants.reduce(
     (images, variant) => {
-      if (variant[optionKey]) {
-        images[variant[optionKey]] = variant.image
+      if (variant[optionKey] && variant.images) {
+        images[variant[optionKey]] = variant.images[0].file.url
       }
       return images
     },
