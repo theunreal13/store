@@ -63,8 +63,7 @@ export async function getAllProductPaths(
   return products?.map((entry: any) => entry.slug) || []
 }
 
-export async function getProduct(builderConfig: any,
-  options: { id?: string; slug?: string; withContent?: boolean }
+export async function getProduct(options: { id?: string; slug?: string; withContent?: boolean }
   ) {
     await swell.init(swellConfig.storeId, swellConfig.publicKey)
     if (Boolean(options.id) === Boolean(options.slug)) {

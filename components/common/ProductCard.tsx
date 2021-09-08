@@ -4,29 +4,12 @@ import { Themed, jsx } from 'theme-ui'
 import { Card, Text } from '@theme-ui/components'
 import { Link, ImageCarousel } from '@components/ui'
 import { getPrice } from '@lib/swell/storefront-data-hooks/src/utils/product'
-import { useState } from 'react'
+import { Product } from '@lib/swell/storefront-data-hooks/src/types'
 
-type SwellProductOption = {
-  id: string
-  name: string
-  values: any[]
-}
-
-export interface SwellProduct {
-  id: string
-  description: string
-  name: string
-  slug: string
-  currency: string
-  price: number
-  images: any[]
-  options: SwellProductOption[]
-  variants: any[]
-}
 
 export interface ProductCardProps {
   className?: string
-  product: SwellProduct
+  product: Product
   imgWidth: number | string
   imgHeight: number | string
   imgLayout?: 'fixed' | 'intrinsic' | 'responsive' | undefined
@@ -44,8 +27,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   imgSizes,
   imgLayout = 'responsive',
 }) => {
-  const handle = (product as any).slug
-
+  const handle = (product).slug
   const price = getPrice(
     product.price,
     product.currency ?? 'USD'

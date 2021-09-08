@@ -24,7 +24,7 @@ const ProductLoader: React.FC<Props> = ({
   useEffect(() => {
     const fetchProduct = async () => {
       setLoading(true)
-      const result = await getProduct(builderConfig, {
+      const result = await getProduct({
         slug: String(product),
       })
       setProduct(result)

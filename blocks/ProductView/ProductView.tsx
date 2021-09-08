@@ -14,7 +14,17 @@ import {
 } from '@lib/swell/storefront-data-hooks/src/utils/product'
 import { ImageCarousel, LoadingDots } from '@components/ui'
 import ProductLoader from './ProductLoader'
-import { OptionInput, OptionValue, ProductOption, Product, ProductProps } from '@lib/swell/storefront-data-hooks/src/types'
+import { OptionInput, OptionValue, ProductOption, Product } from '@lib/swell/storefront-data-hooks/src/types'
+
+export interface ProductProps {
+  className?: string
+  children?: any
+  product: Product
+  renderSeo?: boolean
+  description?: string
+  title?: string
+}
+
 
 const ProductBox: React.FC<ProductProps> = ({
   product,

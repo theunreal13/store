@@ -31,7 +31,7 @@ export async function resolveSwellContent(
             .filter((handle: string | undefined) => typeof handle === 'string')
             .map(
               async (handle: string) =>
-                await getProduct(builderConfig, { slug: handle })
+                await getProduct({ slug: handle })
             )
           products = await Promise.all(promises)
         }
@@ -55,7 +55,7 @@ export async function resolveSwellContent(
       async ProductBox(props) {
         let product = props.product
         if (product && typeof product === 'string') {
-          product = await getProduct(builderConfig, {
+          product = await getProduct({
             slug: product,
           })
         }

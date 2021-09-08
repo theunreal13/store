@@ -37,7 +37,7 @@ const ProductCardDemo: React.FC<ProductCardProps> = ({
     productVariant.price,
     product.currency ?? 'USD'
   )
-  const alternateImage = product.images[1]?.src
+  const alternateImage = product.images[1]?.file.url
 
   return (
     <Card

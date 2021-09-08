@@ -49,8 +49,8 @@ export type CartItem = {
   product: Product
   price: number
   variant: {
-    name: string | null
-    sku: string | null
+    name?: string
+    sku?: string
     id: string
   }
   quantity: number
@@ -93,14 +93,4 @@ export type ProductOption = {
   id: string
   name: string
   values: OptionValue[]
-}
-
-
-export interface ProductProps {
-  className?: string
-  children?: any
-  product: Product
-  renderSeo?: boolean
-  description?: string
-  title?: string
 }

@@ -6,6 +6,7 @@ import { LoadingDots } from '@components/ui'
 import { Grid } from '@theme-ui/components'
 import { ProductCardProps } from '@components/common/ProductCard'
 import { ProductCardDemo, ProductCard } from '@components/common'
+import { Product } from '@lib/swell/storefront-data-hooks/src/types'
 
 import {
   getCollection,
@@ -46,10 +47,11 @@ export const ProductGrid: FC<ProductGridProps> = ({
         .filter((handle: string | undefined) => typeof handle === 'string')
         .map(
           async (handle: string) => {
-            return await getProduct(builderConfig, { slug: handle })
+            return await getProduct({ slug: handle })
           }
         )
-      setProducts(await Promise.all(promises))
+      const result = await Promise.all(promises)
+      setProducts(result)
       setLoading(false)
     }
     if (productsList && !initialProducts) {

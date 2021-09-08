@@ -23,7 +23,7 @@ Builder.isStatic = true
 const builderModel = 'product-page'
 
 export async function getStaticProps(context: GetStaticPropsContext<{ handle: string }>) {
-  const product = await getProduct(builderConfig, {
+  const product = await getProduct({
     slug: context.params?.handle,
   })
   const page = await resolveSwellContent(builderModel, {

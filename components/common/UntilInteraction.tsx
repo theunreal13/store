@@ -10,7 +10,7 @@ const UntilInteraction: React.FC<{ skeleton: React.ReactNode }> = ({
   }
   return (
     <div
-      onMouseOver={() => setRender(true)}
+      // onMouseOver={() => setRender(true)}
       onClick={() => setRender(true)}
       onTouchStart={() => setRender(true)}
     >
