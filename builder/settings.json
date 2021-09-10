@@ -17,9 +17,7 @@
       "type": "SwellProductHandle"
     }
   },
-  "loadPlugins": [
-    "@builder.io/plugin-swell"
-  ],
+  "loadPlugins": ["@builder.io/plugin-swell"],
   "@version": 5,
   "cloneInfo": {
     "contentIdMap": {

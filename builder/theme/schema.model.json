@@ -200,10 +200,7 @@
               "subFields": [],
               "type": "file",
               "simpleTextOnly": false,
-              "allowedFileTypes": [
-                "jpeg",
-                "png"
-              ],
+              "allowedFileTypes": ["jpeg", "png"],
               "advanced": false,
               "hidden": false,
               "disallowRemove": false,
