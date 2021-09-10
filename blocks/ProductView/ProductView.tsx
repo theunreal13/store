@@ -52,7 +52,7 @@ interface Selection extends OptionInput {
   
   const options = product?.options;
 
-  const defaultSelections: Selection[] = options.map((option) => {
+  const defaultSelections: Selection[] = options?.filter(options => options.values?.length).map((option) => {
     return {
       id: option.values[0].id, name: option.name, value: option.values[0].name
     }
@@ -182,7 +182,7 @@ interface Selection extends OptionInput {
             {productOptions?.length && productOptions?.map((option) => {
               return (
               <Grid padding={2} columns={2}>
-                {option.values?.length && (
+                {Boolean(option.values?.length) && (
                 <OptionPicker
                   key={option.id}
                   name={option.name}
