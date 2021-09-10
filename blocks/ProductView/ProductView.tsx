@@ -179,7 +179,7 @@ interface Selection extends OptionInput {
           </span>
           <div dangerouslySetInnerHTML={{ __html: description! }} />
           <div>
-            {productOptions?.length && productOptions?.map((option) => {
+            {productOptions?.length > 0 && productOptions?.map((option) => {
               return (
               <Grid padding={2} columns={2}>
                 {Boolean(option.values?.length) && (
