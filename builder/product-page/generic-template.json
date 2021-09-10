@@ -37,27 +37,6 @@
             "marginTop": "20px"
           }
         }
-      },
-      {
-        "id": "builder-pixel-guqcq08by9",
-        "@type": "@builder.io/sdk:Element",
-        "tagName": "img",
-        "properties": {
-          "src": "https://cdn.builder.io/api/v1/pixel?apiKey=4d832b53c3cf422f9a6c92a23abf35ac",
-          "role": "presentation",
-          "width": "0",
-          "height": "0"
-        },
-        "responsiveStyles": {
-          "large": {
-            "height": "0",
-            "width": "0",
-            "display": "inline-block",
-            "opacity": "0",
-            "overflow": "hidden",
-            "pointerEvents": "none"
-          }
-        }
       }
     ]
   },
