@@ -1,45 +1,40 @@
 {
   "type": "space",
+  "hasIntegrated": "local",
   "settings": {
-    "plugins": {
+    "optimizeContentVisibility": true,
+    "reloadPreviewForMobile": false
+  },
+  "siteUrl": "http://localhost:3000",
+  "customTargetingAttributes": {
+    "collectionHandle": {
+      "type": "SwellCategoryHandle"
+    },
+    "itemInCart": {
+      "type": "SwellProductHandle"
+    },
+    "productHandle": {
+      "type": "SwellProductHandle"
     }
   },
-  "loadPlugins": [
-    "@builder.io/plugin-swell@dev"
-  ],
-  "siteUrl": "http://localhost:3000",
-  "hasIntegrated": "remote",
-  "name": "swell",
-  "ecommerceBackend": "Swell",
-  "@version": 6,
+  "loadPlugins": ["@builder.io/plugin-swell"],
+  "@version": 5,
   "cloneInfo": {
     "contentIdMap": {
-      "df12e3e3db0d41c398a9db4b3e971534": "a859fe35bb9849fe8622ee67217e61b7",
-      "700a5a014c59412ca65dab2a7d41528f": "31ed6e021237453e9a2e9673d196684c",
-      "20f1087f795f4ca4a11559ac249e68cc": "d7d850b48e61463382e32aa9bfb2d5e2",
-      "3d9e2bd4ccb4495194f1516de7d7a1c7": "1c2b0ceede4b4e9e8a0551a038eeb226",
-      "b825cfffdf0b486d882a8e1942d07f10": "451ad395bf9e4edd81b31ee61dad07c4",
-      "93d42fe0b52945eba17441aa37aa9496": "160a27ee6c0d4cfeb4da6fc84e2fa982",
-      "4e7ba68209b246c9b9568bad54cfa802": "18e8bcad8c49458bb0659abd4488f358"
+      "ac5fd99dfef77e38cee5b713cd77fd0676f39168ac84582dc6d4a789ce857e38": "05e6afc6324347b49c0f7c80dae94360",
+      "a312ae57f3de886b360cafc1986714f81e8ed93bc6d0a09f717b9f91dae23f79": "c77df46d5ce0441c86ca4bafd757d88d",
+      "036efa873df3ced70c26f218e2234f53b7611826a1c89915e5671cb3c7f3c1a5": "d221fc78c13a4b0ca96869f9ef096d1b",
+      "6e26c3a66619aa945c31fbde0c5ad35e52b0ecface55a3f5cbdc79952326be96": "e644ce7d6bf949289f1e3d12b21b0ea7",
+      "172a83bd533848d52db8ff1d087a2a2f223d246df3d4f37a82d7defb034e066a": "15594ec857a24558b292e79f8bbec059",
+      "22b07daaafe2483b880096a6b2fac937": "83fa2ebddbb242649499db90d7786fb5"
     },
     "modelIdMap": {
-      "0f5e1fad8615489ea3b5246db5a28c0f": "f6e6d5af7aae4ee9b7ae38c3bba29eab",
-      "22177835894c4ba9ba0b53ba703c2a7d": "97bdae0eb7ff463bbed0e0baa00efab3",
-      "afd0816ec1884b37b290ee9af81dd344": "e46b67bedeaa401a83671d3eb9dc2998",
-      "a73108098bbb4f3799227d014982c202": "e14af4341acb4ff498be333d60bce6ba",
-      "2e49b00b7d4b4549aa38d5f89625b789": "c037fb9cac5e4da9a09d1f8d2c7ae9a7",
-      "33e5294d108848a2835dd7afdf15df00": "85f2c3315cd84090af9f33149f0ddd8d",
-      "fb1d9d4cd14349748f2a136047f014ed": "088a94b16a9d4fbba89ce8eb2b5c0f80",
-      "1a47e93bcaa141e6a612b8896944fb7d": "dafb925220784b9fa8d78b8359dc60df",
-      "cac5e9e4ff48459f839d9c1c6e91e8c3": "19b3f9d955fe4ff9bfb92715ca1bcf6e",
-      "45d7b33ddf8246b68b87c818343e9d99": "03bb0a678ac14427998aaf19c404f4a9",
-      "0fccfb16fc90406fbd974673804f2d83": "af2f7d59cace4df5b0ba539f5a41ced3",
-      "e0989d97086d4c8abf0a81b15cb0fb9d": "2c28ebf1269a416f8662f38e224c578d",
-      "f908b4ebeaa242a3a3ccffb0210e7601": "0ad1e38c413d436e90c76791f895886c",
-      "bc3b721c7f874c87af98da4792f61c59": "3c8ae99622a7447b8c4e7439038802d6",
-      "817dc173b1a74daeb51ade30561f939c": "8799c5311ac1438b91a5a6d361deeda8",
-      "eca8e7f74a07404598fd239df7b162b1": "ca0690736d1b473a86b7bd605a61f9b8",
-      "c2383b4970df41ac85889d218f38475d": "f5e829f860b745408e90a32ade3d8022"
+      "15670ab9d951f7385dab0f6313f22ea884553d0d8ebbe3a39c60afc225df2d3d": "5d7832a6821e439280138b242dfee5ad",
+      "93a28cddbe257c8c956bbdb79408188bfab7220ad04e7c505e572d47a6b0406d": "c97db5356e4b440d94423eb6c6d8173d",
+      "50b47b9bbb4a7e3f4e511d380916bd11ccfb542bdd4662cb5eb87f1cf92c8d3a": "98351febac3a4ec2a6900cd0eaaad0b9",
+      "2d8db355355b2b2fa611387eaeb02e39ed9c64483e31354853c6376f69aa49b0": "706f88a2775b42de9665ea421fc74956",
+      "953b09d275bbb145858565ee9a39294d35903d1b556451d6776655956d6df47c": "081cd8ec88d84fa2bfc39bac56c9144c",
+      "0997d1c844de5489f349df50288f8e98e551089ef0eba4a70f43562ee9f78153": "807497368ce84a74a5382b255b50fc0f"
     }
   }
 }
