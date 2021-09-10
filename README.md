@@ -176,4 +176,4 @@ Now that we have everything setup, start building and publishing pages on builde
 
 You can deploy this code anywhere you like - you can find many deployment options for Next.js [here](https://nextjs.org/docs/deployment).
 
-Don't forget 
+Don't forget to update the Site URL to point to the production URL when ready.
