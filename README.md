@@ -3,7 +3,7 @@
 
 The ultimate starter for headless Swell stores. 
 
-Demo live at [Nextjs-builder](https://nextjs-builder.vercel.app/)
+Demo live at [Nextjs-builder](https://builder-demo-livid.vercel.app/about-us)
 
 ## Goals and Features
 
