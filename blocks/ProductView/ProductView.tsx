@@ -181,7 +181,7 @@ interface Selection extends OptionInput {
           <div>
             {productOptions?.length > 0 && productOptions?.map((option) => {
               return (
-              <Grid padding={2} columns={2}>
+              <Grid padding={2} columns={2} key={option.id}>
                 {Boolean(option.values?.length) && (
                 <OptionPicker
                   key={option.id}

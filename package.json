@@ -2,9 +2,9 @@
   "name": "nextjs-commerce",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --port=3004",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --port=3005",
     "analyze": "BUNDLE_ANALYZE=both yarn build",
     "find:unused": "next-unused",
     "prettier": "prettier"
@@ -88,7 +88,7 @@
     "react-spring-modal": "^2.0.7",
     "react-sticky": "^6.0.3",
     "react-ticker": "^1.2.2",
-    "swell-js": "^3.10.0",
+    "swell-js": "^3.10.7",
     "tailwindcss": "^1.9",
     "theme-ui": "^0.6.2",
     "traverse": "^0.6.6"
