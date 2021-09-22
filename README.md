@@ -1,4 +1,6 @@
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fswellstores%2Fnextjs-builder&env=BUILDER_PUBLIC_KEY,SWELL_STORE_ID,SWELL_PUBLIC_KEY&envDescription=API%20keys%20needed%20to%20connect%20to%20your%20Swell%20store%20and%20Builder%20dashboard&envLink=https%3A%2F%2Fgithub.com%2Fswellstores%2Fnextjs-builder%2Fblob%2Fmaster%2FREADME.md)
+
 # Next.js + Swell + Builder.io starter kit
 
 The ultimate starter for headless Swell stores. 
